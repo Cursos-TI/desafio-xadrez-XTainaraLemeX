@@ -1,10 +1,127 @@
 #include <stdio.h>
 
-int main (){
-    int peca, movimento, andarCasas, menuPrincipal = 1, menuMovimento = 1, movimentoCompleto = 1;
+void moverTorre(int casas, int movimento) 
+{
+    if (casas == 0) return;
 
-    while (menuPrincipal)
+    switch (movimento)
     {
+    case 1:
+        printf("Cima\n");
+    break;
+
+    case 2:
+        printf("Baixo\n");
+    break;
+
+    case 3:
+        printf("Direita\n");
+    break;
+
+    case 4:
+        printf("Esquerda\n");
+    break;
+
+    case 5:
+        printf("Voltando...\n\n");
+    break;
+    
+    default:
+        printf("Opção inválida!\n\n");
+    break;
+    }
+    
+    moverTorre(casas - 1, movimento);
+}
+
+void moverBispo(int casas, int movimento)
+{
+    if (casas == 0) return;
+
+    for (int i = 0; i < 1; i++) 
+    {
+        if (movimento == 1 || movimento == 2)
+            printf("Cima\n");
+        else
+            printf("Baixo\n");
+
+        for (int j = 0; j < 1; j++) 
+        {
+            if (movimento == 1 || movimento == 3)
+                printf("Direita\n");
+            else
+                printf("Esquerda\n");
+        }
+    }
+
+    moverBispo(casas - 1, movimento);
+}
+
+void moverRainha(int casas, int movimento)
+{
+    if (casas == 0) return;
+
+    switch (movimento)
+    {
+    case 1:
+        printf("Cima\n");
+    break;
+
+    case 2:
+        printf("Baixo\n");
+    break;
+
+    case 3:
+        printf("Lado Esquerdo\n");
+    break;
+
+    case 4:
+        printf("Lado Direito\n");
+    break;
+
+    case 5:
+        printf("Cima\n");
+        printf("Esquerda\n");
+    break;
+
+    case 6: 
+        printf("Baixo\n");
+        printf("Esquerda\n");
+    break;
+
+    case 7:
+        printf("Cima\n");
+        printf("Direita\n\n");
+    break;
+
+    case 8:
+        printf("Baixo\n");
+        printf("Direita\n");
+    break;
+
+    case 9:
+        printf("Voltando...\n\n");    
+    break;
+
+    default:
+        printf("Opção inválida!\n\n");
+    break;
+    }
+
+    moverRainha(casas - 1, movimento);
+}
+
+
+
+
+int main ()
+{
+    int movimento, menuPrincipal = 1, menuMovimento = 1, movimentoCompleto = 1 ,peca, casas;
+
+     
+    while(menuPrincipal)
+    {
+
         printf("*JOGO DE XADREZ*\n");
         printf("1. TORRE\n");
         printf("2. BISPO\n");
@@ -17,579 +134,110 @@ int main (){
 
     switch (peca)
     {
-    case 1: 
-        
-        menuMovimento = 1;
+    case 1:
 
-        while (menuMovimento) 
+        printf("Você escolheu Torre. Qual movimento você quer?\n");
+        printf("1. Para Cima.\n");
+        printf("2. Para Baixo.\n");
+        printf("3. Para o Lado Esquerdo.\n");
+        printf("4. Para o Lado Direito.\n");
+        printf("5. Voltar.\n");
+        printf("ESCOLHA: ");
+        scanf("%d", &movimento);
+        printf("\n");
+
+        if (movimento == 5) {
+        printf("Voltando ao menu principal...\n\n");
+        break;
+        }
+
+        printf("Quantas casas você quer andar? ");
+        scanf("%d", &casas);
+        printf("\n");
+
+        if(casas <= 0)
         {
-            printf("Você escolheu Torre. Qual movimento você quer?\n");
-            printf("1. Para Cima.\n");
-            printf("2. Para Baixo.\n");
-            printf("3. Para o Lado Esquerdo.\n");
-            printf("4. Para o Lado Direito.\n");
-            printf("5. Voltar.\n");
-            printf("ESCOLHA: ");
-            scanf("%d", &movimento);
+            printf("ERRO! Sua escolha tem que ser um número positivo inteiro.\n\n");
+        } else {
+            moverTorre(casas, movimento);
             printf("\n");
-
-            switch (movimento)
-            {
-            case 1:
-
-                do
-                {
-                    printf("Você escolheu para Cima.\n");
-                    printf("Quantas casas você quer andar?\n");
-                    printf("ESCOLHA: ");
-                    scanf("%d", &andarCasas);
-                    printf("\n");
-
-                    if(andarCasas <= 0){
-                        printf("ERRO! Sua escolha tem que ser um número positivo inteiro.\n");
-                    }
-
-
-                } while (andarCasas <= 0);
-                
-
-                for (int andar = 0; andar < andarCasas; andar++)
-                {
-                    printf("CIMA\n");
-                    
-                }
-                printf("\n");
-                return 0;
-            
-            break;
-
-            case 2:
-            
-                do
-                {
-                    printf("Você escolheu para o Baixo.\n");
-                    printf("Quantas casas você quer andar?\n");
-                    printf("ESCOLHA: ");
-                    scanf("%d", &andarCasas);
-                    printf("\n");
-
-                    if(andarCasas <= 0)
-                    {
-                        printf("ERRO! Sua escolha tem que ser um número positivo inteiro.\n");
-                    }
-
-
-                } while (andarCasas <= 0);
-                
-
-                for (int andar = 0; andar < andarCasas; andar++)
-                {
-                    printf("BAIXO\n");
-                    
-                }
-                printf("\n");
-                return 0;
-                
-            break;
-
-            case 3:
-                
-                do
-                {
-                    printf("Você escolheu para o Lado Esquerdo.\n");
-                    printf("Quantas casas você quer andar?\n");
-                    printf("ESCOLHA: ");
-                    scanf("%d", &andarCasas);
-                    printf("\n");
-
-                    if(andarCasas <= 0)
-                    {
-                        printf("ERRO! Sua escolha tem que ser um número positivo inteiro.\n");
-                    }
-
-
-                } while (andarCasas <= 0);
-                
-
-                for (int andar = 0; andar < andarCasas; andar++)
-                {
-                    printf("Lado esquerdo\n");
-                    
-                }
-                printf("\n");
-                return 0;
-
-            break;
-
-            case 4:
-                
-                do
-                {
-                    printf("Você escolheu para o Lado Direito.\n");
-                    printf("Quantas casas você quer andar?\n");
-                    printf("ESCOLHA: ");
-                    scanf("%d", &andarCasas);
-                    printf("\n");
-
-                    if(andarCasas <= 0)
-                    {
-                        printf("ERRO! Sua escolha tem que ser um número positivo inteiro.\n");
-                    }
-
-
-                } while (andarCasas <= 0);
-                
-
-                for (int andar = 0; andar < andarCasas; andar++)
-                {
-                    printf("Lado Direito\n");
-                    
-                }
-                printf("\n");
-                return 0;
-
-            break;
-
-            case 5:
-                printf("Voltando...\n");
-                menuMovimento = 0;
-            break;
-
-            default:
-                printf("Opção inválida!\n\n");
-            break;
-            }
-
         }
 
     break;
 
-    case 2: 
+    case 2:
 
-        menuMovimento = 1;
+        printf("Você escolheu Bispo. Qual movimento você quer?\n");
+        printf("1. Cima para Direita\n");
+        printf("2. Cima para Esquerda\n");
+        printf("3. Baixo para Direita\n");
+        printf("4. Baixo para Esquerda\n");
+        printf("5. Voltar.\n");
+        printf("ESCOLHA: ");
+        scanf("%d", &movimento);
+        printf("\n");
 
-        while (menuMovimento) 
-        {
-            printf("Você escolheu Bispo. Qual movimento você quer?!\n");
-            printf("1. Diagonal Esquerda para Cima.\n");
-            printf("2. Diagonal Esquerda para Baixo.\n");
-            printf("3. Diagonal Direita para Cima.\n");
-            printf("4. Diagonal Direita para Baixo.\n");
-            printf("5. Voltar.\n");
-            printf("ESCOLHA: ");
-            scanf("%d", &movimento);
+        if (movimento == 5) {
+        printf("Voltando ao menu principal...\n\n");
+        break;
+        }
+
+       do 
+       {
+            printf("Quantas casas você quer andar? ");
+            scanf("%d", &casas);
             printf("\n");
 
-            switch (movimento)
+            if (casas <= 0) 
             {
-            case 1:
-
-                do
-                {
-                    printf("Você escolheu Diagonal Esquerda para Cima.\n");
-                    printf("Quantas casas você quer andar?\n");
-                    printf("ESCOLHA: ");
-                    scanf("%d", &andarCasas);
-                    printf("\n");
-
-                    if(andarCasas <= 0)
-                    {
-                        printf("ERRO! Sua escolha tem que ser um número positivo inteiro.\n");
-                    }
-
-
-                } while (andarCasas <= 0);
-                
-
-                for (int andar = 0; andar < andarCasas; andar++)
-                {
-                    printf("CIMA\n");
-                    printf("ESQUERDA\n\n");
-                    
-                }
-                printf("\n");
-                return 0;
-            
-            break;
-
-            case 2:
-            
-                do
-                {
-                    printf("Você escolheu Diagonal Esquerda para Baixo.\n");
-                    printf("Quantas casas você quer andar?\n");
-                    printf("ESCOLHA: ");
-                    scanf("%d", &andarCasas);
-                    printf("\n");
-
-                    if(andarCasas <= 0)
-                    {
-                        printf("ERRO! Sua escolha tem que ser um número positivo inteiro.\n");
-                    }
-
-
-                } while (andarCasas <= 0);
-                
-
-                for (int andar = 0; andar < andarCasas; andar++)
-                {
-                    printf("BAIXO\n");
-                    printf("ESQUERDA\n\n");
-                    
-                }
-                printf("\n");
-                return 0;
-                
-            break;
-
-            case 3:
-                
-                do
-                {
-                    printf("Você escolheu Diagonal Direita para Cima.\n");
-                    printf("Quantas casas você quer andar?\n");
-                    printf("ESCOLHA: ");
-                    scanf("%d", &andarCasas);
-                    printf("\n");
-
-                    if(andarCasas <= 0)
-                    {
-                        printf("ERRO! Sua escolha tem que ser um número positivo inteiro.\n");
-                    }
-
-
-                } while (andarCasas <= 0);
-                
-
-                for (int andar = 0; andar < andarCasas; andar++)
-                {
-                    printf("CIMA\n");
-                    printf("DIREITA\n\n");
-
-                }
-                printf("\n");
-                return 0;
-
-            break;
-
-            case 4:
-                
-                do
-                {
-                    printf("Você escolheu Diagonal Direita para Baixo.\n");
-                    printf("Quantas casas você quer andar?\n");
-                    printf("ESCOLHA: ");
-                    scanf("%d", &andarCasas);
-                    printf("\n");
-
-                    if(andarCasas <= 0)
-                    {
-                        printf("ERRO! Sua escolha tem que ser um número positivo inteiro.\n");
-                    }
-
-
-                } while (andarCasas <= 0);
-                
-
-                for (int andar = 0; andar < andarCasas; andar++)
-                {
-                    printf("BAIXO\n");
-                    printf("DIREITA\n\n");
-                    
-                }
-                printf("\n");
-                return 0;
-
-            break;
-
-            case 5:
-                printf("Voltando...\n");
-                menuMovimento = 0;
-            break;
-
-            default:
-                printf("Opção inválida!\n\n");
-            break;
+                printf("ERRO! Digite um número positivo.\n");
             }
 
-        }
-        
-        
-    break;
+        } while (casas <= 0);
+
+        moverBispo(casas, movimento);
+        return 0;
+    break; 
 
     case 3:
 
-        menuMovimento = 1;
+        printf("Você escolheu RAINHA. Qual movimento você quer?!\n");
+        printf("1. Para Cima.\n");
+        printf("2. Para Baixo.\n");
+        printf("3. Para o Lado Esquerdo.\n");
+        printf("4. Para o Lado Direito.\n");
+        printf("5. Diagonal Cima para Esquerda.\n");
+        printf("6. Diagonal Baixo para Esquerda.\n");
+        printf("7. Diagonal Cima para Direita.\n");
+        printf("8. Diagonal Baixo para Direita.\n");
+        printf("9. Voltar.\n"); 
+        printf("ESCOLHA: ");
+        scanf("%d", &movimento);
+        printf("\n");
 
-        while (menuMovimento) 
-        {
-            printf("Você escolheu RAINHA. Qual movimento você quer?!\n");
-            printf("1. Para Cima.\n");
-            printf("2. Para Baixo.\n");
-            printf("3. Para o Lado Esquerdo.\n");
-            printf("4. Para o Lado Direito.\n");
-            printf("5. Diagonal Esquerda para Cima.\n");
-            printf("6. Diagonal Esquerda para Baixo.\n");
-            printf("7. Diagonal Direita para Cima.\n");
-            printf("8. Diagonal Direita para Baixo.\n");
-            printf("9. Voltar.\n");
-            printf("ESCOLHA: ");
-            scanf("%d", &movimento);
-            printf("\n");
-
-            switch (movimento)
-            {
-            case 1:
-
-                do
-                {
-                    printf("Você escolheu para Cima.\n");
-                    printf("Quantas casas você quer andar?\n");
-                    printf("ESCOLHA: ");
-                    scanf("%d", &andarCasas);
-                    printf("\n");
-
-                    if(andarCasas <= 0)
-                    {
-                        printf("ERRO! Sua escolha tem que ser um número positivo inteiro.\n");
-                    }
-
-
-                } while (andarCasas <= 0);
-                
-
-                for (int andar = 0; andar < andarCasas; andar++)
-                {
-                    printf("CIMA\n");
-                    
-                }
-                printf("\n");
-                return 0;
-            
-            break;
-
-            case 2:
-            
-                do
-                {
-                    printf("Você escolheu para o Baixo.\n");
-                    printf("Quantas casas você quer andar?\n");
-                    printf("ESCOLHA: ");
-                    scanf("%d", &andarCasas);
-                    printf("\n");
-
-                    if(andarCasas <= 0)
-                    {
-                        printf("ERRO! Sua escolha tem que ser um número positivo inteiro.\n");
-                    }
-
-
-                } while (andarCasas <= 0);
-                
-
-                for (int andar = 0; andar < andarCasas; andar++)
-                {
-                    printf("BAIXO\n");
-                    
-                }
-                printf("\n");
-                return 0;
-                
-            break;
-
-            case 3:
-                
-                do
-                {
-                    printf("Você escolheu para o Lado Esquerdo.\n");
-                    printf("Quantas casas você quer andar?\n");
-                    printf("ESCOLHA: ");
-                    scanf("%d", &andarCasas);
-                    printf("\n");
-
-                    if(andarCasas <= 0)
-                    {
-                        printf("ERRO! Sua escolha tem que ser um número positivo inteiro.\n");
-                    }
-
-
-                } while (andarCasas <= 0);
-                
-
-                for (int andar = 0; andar < andarCasas; andar++)
-                {
-                    printf("Lado esquerdo\n");
-                    
-                }
-                printf("\n");
-                return 0;
-
-            break;
-
-            case 4:
-                
-                do
-                {
-                    printf("Você escolheu para o Lado Direito.\n");
-                    printf("Quantas casas você quer andar?\n");
-                    printf("ESCOLHA: ");
-                    scanf("%d", &andarCasas);
-                    printf("\n");
-
-                    if(andarCasas <= 0)
-                    {
-                        printf("ERRO! Sua escolha tem que ser um número positivo inteiro.\n");
-                    }
-
-
-                } while (andarCasas <= 0);
-                
-
-                for (int andar = 0; andar < andarCasas; andar++)
-                {
-                    printf("Lado Direito\n");
-                    
-                }
-            
-            case 5:
-
-                do
-                {
-                    printf("Você escolheu Diagonal Esquerda para Cima.\n");
-                    printf("Quantas casas você quer andar?\n");
-                    printf("ESCOLHA: ");
-                    scanf("%d", &andarCasas);
-                    printf("\n");
-
-                    if(andarCasas <= 0)
-                    {
-                        printf("ERRO! Sua escolha tem que ser um número positivo inteiro.\n");
-                    }
-
-
-                } while (andarCasas <= 0);
-                
-
-                for (int andar = 0; andar < andarCasas; andar++)
-                {
-                    printf("CIMA\n");
-                    printf("ESQUERDA\n\n");
-                    
-                }
-                printf("\n");
-                return 0;
-            
-            break;
-
-            case 6:
-            
-                do
-                {
-                    printf("Você escolheu Diagonal Esquerda para Baixo.\n");
-                    printf("Quantas casas você quer andar?\n");
-                    printf("ESCOLHA: ");
-                    scanf("%d", &andarCasas);
-                    printf("\n");
-
-                    if(andarCasas <= 0)
-                    {
-                        printf("ERRO! Sua escolha tem que ser um número positivo inteiro.\n");
-                    }
-
-
-                } while (andarCasas <= 0);
-                
-
-                for (int andar = 0; andar < andarCasas; andar++)
-                {
-                    printf("BAIXO\n");
-                    printf("ESQUERDA\n\n");
-                    
-                }
-                printf("\n");
-                return 0;
-                
-            break;
-
-            case 7:
-                
-                do
-                {
-                    printf("Você escolheu Diagonal Direita para Cima.\n");
-                    printf("Quantas casas você quer andar?\n");
-                    printf("ESCOLHA: ");
-                    scanf("%d", &andarCasas);
-                    printf("\n");
-
-                    if(andarCasas <= 0)
-                    {
-                        printf("ERRO! Sua escolha tem que ser um número positivo inteiro.\n");
-                    }
-
-
-                } while (andarCasas <= 0);
-                
-
-                for (int andar = 0; andar < andarCasas; andar++)
-                {
-                    printf("CIMA\n");
-                    printf("DIREITA\n\n");
-
-                }
-                printf("\n");
-                return 0;
-
-            break;
-
-            case 8:
-                
-                do
-                {
-                    printf("Você escolheu Diagonal Direita para Baixo.\n");
-                    printf("Quantas casas você quer andar?\n");
-                    printf("ESCOLHA: ");
-                    scanf("%d", &andarCasas);
-                    printf("\n");
-
-                    if(andarCasas <= 0)
-                    {
-                        printf("ERRO! Sua escolha tem que ser um número positivo inteiro.\n");
-                    }
-
-
-                } while (andarCasas <= 0); 
-                
-
-                for (int andar = 0; andar < andarCasas; andar++)
-                {
-                    printf("BAIXO\n");
-                    printf("DIREITA\n\n");
-                    
-                }
-
-                printf("\n");
-                return 0;
-
-            break;
-
-            case 9:
-                printf("Voltando...\n");
-                menuMovimento = 0;
-            break;
-
-            default:
-                printf("Opção inválida!\n\n");
-            break;
-            }
-
+        if (movimento == 9) {
+        printf("Voltando ao menu principal...\n\n");
+        break;
         }
         
+        printf("Quantas casas você quer andar? ");
+        scanf("%d", &casas);
+        printf("\n");
+
+        if(casas <= 0)
+        {
+            printf("ERRO! Sua escolha tem que ser um número positivo inteiro.\n\n");
+        } else {
+            moverRainha(casas, movimento);
+            printf("\n");
+        }
+        return 0;
     break;
 
     case 4:
 
         menuMovimento = 1;
-        
+
         while (menuMovimento) 
         {
             printf("Você escolheu CAVALO. Qual movimento você quer?!\n");
@@ -678,6 +326,8 @@ int main (){
     
                 return 0;
             
+            break;
+            
             case 5:
 
                     printf("Você escolheu Dois para o lado esquerdo e um para cima.\n\n");
@@ -765,14 +415,17 @@ int main (){
     break;
 
     case 5:
-        printf("Saindo do Programa...\n");
+        printf("Saindo do programa...\n");
         menuPrincipal = 0;
     break;
 
     default:
-        printf("Opção invalida!\n\n");
+        printf("Opção inválida!\n\n");
     break;
-    }  
+
     }
+
+    }
+
     return 0;
 }
